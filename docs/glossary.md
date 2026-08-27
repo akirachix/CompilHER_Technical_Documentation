@@ -37,7 +37,7 @@ rainfall.
 
 **Feedback loop bias** — When a model's predictions determine where data is collected, which
 reinforces those predictions. Unpatrolled cells generate no reports, so they look safe, so they stay
-unpatrolled. See [Evaluation](ai/evaluation.md#feedback-loop-bias).
+unpatrolled.
 
 **GEE** — Google Earth Engine. Platform for planetary-scale satellite imagery analysis.
 
