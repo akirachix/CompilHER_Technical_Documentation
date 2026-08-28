@@ -790,7 +790,7 @@ For detailed step-by-step test executions and evidence records, refer to the fol
 
 [Informational Website TDD Test](https://github.com/akirachix/-Compil-HER_Informational_Website/blob/feature/testCompil_Her/compil-Her-test-script.cy.js)
 
-[Dashboard Playwright Tests](https://github.com/akirachix/Compil-HER_Dashboard/feature/tahadhari.spec.js)
+
 
 ### Bug reporting Template
 
