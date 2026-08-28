@@ -17,7 +17,7 @@ pipeline attached that pulls in environmental data and writes back risk scores.
 
 Security controls in the running system: bearer-token authentication on protected endpoints, closed
 registration with no public signup, UUID identifiers throughout so nothing is enumerable, and TLS in
-transit. Full detail in [Security](security.md).
+transit.
 
 ## Components
 
@@ -130,5 +130,4 @@ returns. Photos link separately, after the report exists. Full detail on the off
 ## Related
 
 - [Backend](backend.md) — the API surface in full
-- [Database](database.md) — tables, columns and the ERD
 - [Mobile](mobile.md) — the offline sync model
