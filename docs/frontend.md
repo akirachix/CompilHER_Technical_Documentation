@@ -1,169 +1,248 @@
-# Tahadhari Frontend
+## Project Setup
 
----
+This explains how the project was started, how to run the informational website and dashboard, how to clone the repository, how to install the required packages, how to create the initial boilerplate, how the code is organized.
 
-## Getting Started
+The project contains two primary user-facing areas:
 
-To spin up this frontend workspace on your local machine, ensure you satisfy the basic tool requirements before initiating the local development server parameters.
+| Area                      | Purpose               |
+| ----------                | --------------------- |
+| Informational website     | Presents the project purpose features and public information           |
+|Dashboard                  | Provides authenticated commanders access to application data and management features                 |
 
-### 1. Prerequisites
+### Install the required tools
 
-| Tool       | Version               |
-| ---------- | --------------------- |
-| Node.js    | 20.x LTS              |
-| npm        | Included with Node.js |
-| Git        | Recent version        |
+Install Git, Node.js, and npm and confirm that the tools are available before continuing.
 
-### 2. Clone the Repositories
-Pull down the project code from the remote repository branch:
+
+| Package installation      |  Confirm Installation             |
+| ----------                | --------------------- |
+| npm install     | npm --version          |
+|node install     |  node --version                 |
+
+### Clone the repository
 ```bash
-git clone https://github.com
+git clone https://github.com/akirachix/-Compil-HER_Informational_Website.git
+git clone https://github.com/akirachix/Compil-HER_Dashboard.git
 ```
-
-### 3. Local Workspace Optimization
-Navigate directly into the root workspace folder, install the core node dependency tree, and map your environment variables:
+### Move into the project folder
 ```bash
 cd Compil-HER_Dashboard
+cd -Compil-HER_Informational_Website
+```
+
+### Install project dependencies
+Install all packages listed in package.json.
+```bash
 npm install
 ```
-Create an uncommitted file structure named `.env.local` directly inside your project's root folder block. Paste the following variable routing token to hook up your client requests straight to your local running FastAPI system engine:
-```env
-NEXT_PUBLIC_API_URL=http://localhost:8000
-```
-
-Boot up the local hot-reloading Next.js live file compiler watcher:
+### Create the boilerplate for the project
+The boilerplate provides the initial application entry point, source directory, build configuration, and package scripts. 
 ```bash
-npm run dev
+npm create next-app@latest Compil-HER_Dashboard
+npm create next-app@latest -Compil-HER_Informational_Website
+
 ```
-Once your build sequence finishes successfully, open your web browser tool and go directly to `http://localhost:3000` to view the running application workspace.
 
----
+### Setup command summary
 
-##  Core Directory Architecture
+|  Step | Command | Result |
+| -------- | -------- | -------- |
+| Clone | git clone repository-url | Downloads the repository|
+| Enter repository| cd project-folder |Sets the working directory|
+| Install packages | npm install | Installs dependencies|
+| Create boilerplate |npm create next-app@latest <folder-name> | Creates the initial React structure|
+| Start development | npm run dev | Runs the local development server.|
 
-We built a modular, clean directory tree utilizing the features of the **Next.js App Router** framework. Instead of clustering components into one file space, folders are structurally isolated. We use route groups like `(Auth)` to keep our gateway pages separate from the protected metrics views found inside our core dashboard panels.
+## Code Structure
+### Overview
+The application is organized by responsibility. 
 
+ **Core Configuration Files**
+
+* *package.json*: Manages project dependencies and scripts.eslint.
+* *config.mjs*: Configures linting rules to maintain code quality
+* *..gitignore*: Specifies files and folders for Git to ignore.
+* *env.local* : Stores local environment variables securely.
+
+ **Shared Directories**
+
+* *components*: Houses reusable UI building blocks shared across different pages.
+
+* *public*: Stores static assets such as images, logos, and custom fonts.
+* *node_modules*: Contains all installed third-party npm packages.
+
+**The root Directory**
+
+This folder handles the application's routing, layouts, and global styles.
+
+* *layout.jsx & page.jsx*: The main entry points defining the global layout and the landing/home page of the site.
+* *globals.css*: Contains global styles applied across the entire application.
+
+### Main directory Structure
+
+**Dashboard**
 ```text
 app/
-├── (Auth)/                           # Secure Gateway Entry Workflows
-│   └── login/                        
-│       ├── login.css                 # Presentation layout rules for split panels
-│       └── page.jsx                  # Multi-step authentication view router logic
-├── dashboard/                        # Protected Mission Control Workspace
-│   ├── data-analytics/               
-│   │   ├── data-analytics.css        # Layout formatting constraints for map grids
-│   │   ├── incident-distribution.jsx # Analytical chart reporting interfaces
-│   │   ├── incidents-area.jsx        # Cluster tracking map overlay components
-│   │   ├── incidents-trend.jsx       # Linear activity trend visualization tools
-│   │   └── page.jsx                  # Core Operations analytics workspace
-│   ├── home-page/                    
-│   │   ├── home-page.css             
-│   │   └── page.jsx                  # Commander default control deck
-│   ├── HotSpot-Prediction/           
-│   │   ├── HotSpot-Prediction.css    # Heatmap threat code values configuration
-│   │   └── page.jsx                  # Machine learning spatial predictive map layout
-│   ├── incident-report/              
-│   │   ├── incident.css              
-│   │   └── page.jsx                  # Live field report processing workspace
-│   ├── manage-rangers/               
-│   │   ├── manage-rangers.css        # Shift boards and status grids formatting
-│   │   └── page.jsx                  # Ranger personnel deployment tracking matrix
-│   ├── patrol-logs/                  
-│   │   ├── patrol-logs.css           
-│   │   └── page.jsx                  # Archival logging datatable interface
-│   └── settings/                     
-│       ├── change-pass.jsx           # Account password update management logs
-│       ├── notification.jsx          # Event alert triggers and noise settings
-│       ├── preferences.jsx           # Theme toggle sets and default configurations
-│       └── settings.css              
-├── layout.css                        # Frame-level application structure style sheet
-├── layout.jsx                        # Master context layer wrapping system state stores
-├── page.jsx                          # Public-facing Informational landing portal root
-├── globals.css                       # Root system colors and Tailwind configuration tokens
-└── favicon.ico                       
+├── (Auth)/
+│   └── login/
+│       ├── login.css
+│       └── page.jsx
+├── dashboard/
+│   ├── data-analytics/
+│   │   ├── data-analytics.css
+│   │   ├── incident-distribution.jsx
+│   │   ├── incidents-area.jsx
+│   │   ├── incidents-trend.jsx
+│   │   └── page.jsx
+│   ├── home-page/
+│   │   ├── home-page.css
+│   │   └── page.jsx
+│   ├── HotSpot-Prediction/
+│   │   ├── Hotspot-Prediction.css
+│   │   └── page.jsx
+│   ├── incident-report/
+│   │   ├── incident.css
+│   │   └── page.jsx
+│   ├── manage-rangers/
+│   │   ├── manage-rangers.css
+│   │   └── page.jsx
+│   ├── patrol-logs/
+│   │   ├── page.jsx
+│   │   └── patrol-logs.css
+│   ├── settings/
+│   │   ├── change-pass.jsx
+│   │   ├── notification.jsx
+│   │   ├── page.jsx
+│   │   ├── preferences.jsx
+│   │   └── settings.css
+│   ├── layout.css
+│   ├── layout.jsx
+│   └── page.jsx
+├── favicon.ico
+├── globals.css
+├── layout.jsx
+└── page.jsx
 ```
-
 ---
 
+
+**Informational Website**
+```text
+├── public/              # Static assets (images, icons)
+├── src/
+│   ├── components/      # Reusable layout UI blocks
+│   │   ├── Navbar.jsx   # Global responsive navigation header
+│   │   ├── Footer.jsx   # Global navigation and resource footer
+│   │   └── Card.jsx     # Reusable layout blocks for services and teams
+│   ├── pages/           # Application entry points and route mappings
+│   │   ├── index.jsx    # Home view
+│   │   ├── about.jsx    # Project background and team profile view
+│   │   └── services.jsx # Detailed system service breakdowns
+│   └── styles/          # Global stylesheets and Tailwind configurations
+
+```
 ---
 
-## The Multi-Step Authentication Gateway
+### Environment variables
+A **.env** file is used to **store sensitive data and configuration settings** outside of the main source code. It keeps private credentials like database passwords, API keys and encryption secrets out of the source code so they aren't accidentally shared or pushed to public repositories like GitHub.
 
-The login interface operates as a clean, single-route user experience wizard. Instead of throwing resource heavy browser path redirects across different links, the layout tracks an internal component status variable to swap subcomponents inline.
+It allows you to easily change settings depending on where the app is running without changing the code itself. The file is named .env.local. Next.js automatically detects this file and loads its variables into process.env. This file is automatically ignored by Git  so the private keys remain safe on your local machine.
 
-### Visual Interface Split Design
-The entry viewport separates the screen cleanly into two balanced zones. The left pane anchors our visual legacy using our gold-crest lion asset, while the right panel displays our sand-tinted interface controls.
+## Informational Website
+### 1. Landing Page
 
-![Alternative Text](assets/frontend/login.png)
+Introduces the project and directs visitors to the main areas of the website.
+
+### 2. Services
+
+Explains the services provided by the project.
+
+### 3. About Us
+
+Presents background information about the project and its team or organization.
 
 
-When a user interacts with this login card, the system executes a secure two-step network contract sequence.
+## Dashboard
+### 1. Commander Login
+Authenticates commanders before they access dashboard features.
 
-### Step 1: Initial Credentials Authentication
-When the commander enters their login text data and clicks the "Continue" form action button, our code triggers a validation request to verify baseline account entry credentials.
-
-* **API Target Endpoint**: `POST /api/v1/auth/login`
-* **Transport Payload Envelope**: `application/json`
-
-```json
-{
-  "email": "commander.tahadhari@domain.com",
-  "password": "SecurePassword123"
-}
+**Sample Request**
 ```
-```json
 {
-  "status": "success",
-  "message": "Verification code dispatched to registered channel",
-  "step_required": "two_factor_verify"
-}
-```
-
-### Step 2: Multi-Factor Email Token Matching
-As soon as the frontend receives confirmation from Step 1, the inner screen component state updates instantly. It replaces the input field layer with our email confirmation box so the commander can type their 6-digit access code without a single layout blink.
-
-![Alternative Text](assets/frontend/screen.png)
-
-* **API Target Endpoint**: `POST /api/v1/auth/verify`
-* **Transport Payload Envelope**: `application/json`
-
-```json
-{
-  "email": "commander.tahadhari@domain.com",
-  "verification_code": "123456"
-}
-```
-```json
-{
-  "status": "authenticated",
-  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
-  "expires_in": 86400
+    "email": "admin12@example.com",
+    "password" : "Password123@"
 }
 ```
 
-Once this step evaluates successfully and the validation response registers a security JSON Web Token (JWT) in our system storage, the dashboard launches the user directly into their core workspace control engine.
+![Login Screen](assets/frontend-web/login.png)
 
----
 
-## Repository Coding Standards
+**Sample Response**
+```
+{
+    "code": 123456,
+    "mfa_token": "afeghftsesatuyrtd:vghxgxz:rwdytyfhfx"
+}
+```
 
-To ensure long-term code maintainability and prevent design clutter as our team grows, all commits targeting this frontend code asset branch must stick to these unified engineering rules:
+![mfa Screen](assets/frontend-web/mfa.png)
 
-* **Component Structures**: Code maps must always use **Functional React Components** alongside clean hook definitions to maximize UI performance.
-* **Naming Topography Matrix**:
-  * Use `camelCase` parameters for local state flags, scope functions, variables, and arrays.
-  * Use `PascalCase` formatting for structural file names, master components, and layout wrappers.
-  * Use `SCREAMING_SNAKE_CASE` exclusively when referencing static variables, configuration constants, or environment targets.
-* **File Separation Rule**: Maintain **one component per file**. If a page relies on small, nested layout widgets, move them out into separate files inside that page module's directory path rather than building code elements inline.
 
----
+**Sample Response**
+```
+{
+    "access_token": "ERQWEFHGCE:VCFDXZC:GRATHGF",
+    "role": "Commander"
+}
+```
 
-##  The Continuous Deployment Pipeline
 
-Our client compilation and version deployment workflow is entirely automated using Vercel. This gives us zero-downtime integration updates whenever team changes land safely on our primary code branch.
+### 2. Ranger Onboarding
+After successful authentication, the application redirects the commander to the dashboard.
+The commander can add or register rangers and records their onboarding information.
 
-* **Target Production Platform**: Vercel Cloud Server Environment (Edge Execution Architecture)
-* **Trunk Release Trigger**: Monitored continuous updates tied directly to the production `main` code branch.
+![ranger onboarding Screen](assets/frontend-web/manage.png)
 
-* **Preview Pipeline Isolation**: Opening any Pull Request on GitHub automatically spins up a clean, isolated staging testing URL link. This allows engineering teams to perform visual audits and check design guideline compliance before merging any feature into production.
+### 3. View Hotspot grids
+Displays hotspot grid information for monitoring and operational planning. The sqaures are gridded by 1km. 
+
+![hotspot Screen](assets/frontend-web/route.png)
+
+### 4. Patrol route assignment
+Assigns patrol routes to rangers or patrol teams based on risk levels and priority.
+
+![route Screen](assets/frontend-web/grid.png)
+
+### 5. View Reports
+The commander is able to view reports submitted by rangers. Filter by date, severity and status.
+
+![reports Screen](assets/frontend-web/logs.png)
+
+![reports Screen](assets/frontend-web/reports.png)
+
+### 5. View KPIs
+Displays key performance indicators used to monitor project performance.
+
+![dashboard Screen](assets/frontend-web/dashbaord.png)
+
+
+## Website and dashboard distinction
+
+|  Feature | Informational website | Dashboard |
+| -------- | -------- | -------- |
+| Main purpose| Explains the project and its features | Provides application functionality|
+| Access| Public |Requires authentication|
+| Layout |Website navigation and marketing content | Sidebar, header, and application content|
+| Data |General public information| User-specific and restricted data|
+
+## Code Standards
+* **Components**: Always use functional components for consistency and performance.
+* **Naming**:
+camelCase for variables and functions
+PascalCase for component names
+SCREAMING_SNAKE_CASE for constants
+* **Files**: One component per file. Group by feature/module for maintainability.
+* **Testing**: Use Jest, playwright and React Testing Library for unit tests; add tests for each new component or logic.
+**Styling**: Tailwind CSS only. Avoid inline styles unless absolutely necessary.
+* **Accessibility**: All UI should meet WCAG AA standards. Use semantic HTML and aria attributes.
 
