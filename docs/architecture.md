@@ -127,6 +127,12 @@ local queue while offline, and pushes that queue to `/api/v1/reports/sync` once 
 returns. Photos link separately, after the report exists. Full detail on the offline model is in
 [Mobile](mobile.md).
 
+### Brand Styleguide
+
+<img class="architecture-image styleguide-image"
+     src="../assets/brand/styleguide.png"
+     alt="TAHADHARI brand styleguide">
+
 ## Related
 
 - [Backend](backend.md) — the API surface in full

@@ -46,22 +46,13 @@ TAHADHARI helps teams ask:
 
 ## How TAHADHARI works
 
-At a high level, TAHADHARI follows a continuous information loop:
+TAHADHARI follows a continuous information loop:
 
-```mermaid
-flowchart LR
+1. **Rangers patrol** and file incident reports from the field.
+2. **Environmental data** — vegetation, rainfall, moon phase — is ingested per grid cell.
+3. **The platform** combines both into a risk assessment for every cell.
+4. **The risk map** shows commanders which cells need attention.
+5. **Commanders assign patrols** to the highest-risk cells.
+6. Those patrols produce new reports, which feed back into step 1.
 
-    A[Patrols and incident reports] --> B[TAHADHARI platform]
-
-    C[Environmental data] --> B
-
-    B --> D[Risk assessment]
-
-    D --> E[Risk map]
-
-    E --> F[Commander assigns patrols]
-
-    F --> G[Rangers patrol]
-
-    G --> A
-```
+Each cycle improves the next prediction: the more ground rangers cover, the more the model has to learn from.
