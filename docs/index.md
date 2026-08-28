@@ -1,74 +1,108 @@
-<!-- # TAHADHARI
 
-![TAHADHARI](assets/brand/tahadhari-logo.png){ width="320" }
+# **Welcome to Tahadhari**
+Turning conservation data into smarter patrol decisions.
+--------------------------------------------------------------------------
 
-**TAHADHARI is an offline-first conservation intelligence and patrol prioritisation platform.**
-It turns fragmented park data — ranger patrol history, community reports, snare records, satellite
-vegetation indices and weather — into a ranked map of where poachers are most likely to set snares
-next, so commanders can send patrols to the right grid cell instead of guessing.
+<div class="tah-home" markdown>
 
-The field app keeps working with no cellular signal, stores reports locally, and syncs when the
-ranger returns to base camp.
+<img class="tah-logo" src="assets/brand/tahadhari-logo2.png" alt="TAHADHARI">
 
----
+<a class="tah-website" href="https://compil-her-informational-website.vercel.app/" target="_blank" rel="noopener">
+  Visit the TAHADHARI Website →
+</a>
 
-## Start here
+<<div class="tah-hero" markdown>
 
-<div class="grid cards" markdown>
+## Technology for Smarter Wildlife Protection
 
-- :material-rocket-launch: **[Getting Started](getting-started/index.md)**
-
-    Clone, install, configure, migrate, seed, run, and confirm the stack is alive.
-
-- :material-sitemap: **[Architecture](architecture/index.md)**
-
-    The components, how data moves between them, and the offline sync model.
-
-- :material-api: **[API Reference](backend/api-reference.md)**
-
-    Every endpoint currently exposed by the deployed backend, transcribed from the live OpenAPI schema.
-
-- :material-database: **[Database](database/index.md)**
-
-    Tables, columns, types, constraints, and the ERD.
-
-- :material-brain: **[AI and Prediction](ai/index.md)**
-
-    The risk model, its inputs, how it is evaluated, and what it cannot do.
-
-- :material-help-circle: **[Open Questions](open-questions.md)**
-
-    Everything this documentation could **not** verify, in one list.
+Turning conservation data into proactive patrol decisions.
 
 </div>
 
----
+<div class="tah-intro" markdown>
 
-## How to read this documentation
+TAHADHARI is an offline-first conservation intelligence and patrol prioritisation platform. It brings together patrol history, incident reports, community intelligence, satellite data, and environmental conditions to support smarter patrol decisions.
 
-This site follows one rule, in this order of priority:
+Designed for the realities of the field, TAHADHARI continues working when cellular connectivity is unavailable, allowing rangers to record information offline and synchronise it when connectivity returns.
 
-!!! quote "Accuracy > completeness > polish"
-    A clearly marked gap is better than a confident invention.
+</div>
 
-Because of that rule you will see three markers throughout:
+## Our Platforms
 
-| Marker | Meaning |
-| --- | --- |
-| `[VERIFY]` | Stated in a project document but **not** confirmed against running code or the live API. Treat as a strong hint, not a fact. |
-| `[NOT YET DOCUMENTED]` | Nobody has written this down yet. It is a task, not an omission. |
-| `[DECISION NEEDED]` | Two project sources contradict each other. The team must pick one. See [Open Questions](open-questions.md). |
+<div class="tah-slider">
 
-## What was used as the source of truth
+<img src="assets/brand/slide-1.png" alt="TAHADHARI risk intelligence platform">
 
-Documentation was written against the following evidence, in descending order of authority:
+<img src="assets/brand/slide-2.png" alt="TAHADHARI commander platform">
 
-1. **The live deployed API** at `https://tahadhari-4157e9afb97a.herokuapp.com` — its Swagger UI,
-   ReDoc page, OpenAPI 3.1 schema, and real request/response captures. This is the highest
-   authority: it is running code.
-2. **The entity relationship diagram** exported from the working database.
-3. **The internal draft "Production Technical Documentation"** — useful for intent and rationale,
-   but it disagrees with the live system in several places. Those disagreements are recorded in
-   [Open Questions](open-questions.md) rather than smoothed over.
+<img src="assets/brand/slide-3.png" alt="TAHADHARI ranger mobile application">
 
-Anything not covered by those three sources is marked, not guessed. -->
+</div>
+
+## Key Features
+
+<div class="tah-features" markdown>
+
+<div class="tah-feature" markdown>
+
+### :material-map-marker-radius:
+
+**Predictive Risk Mapping**
+
+Identify areas of elevated poaching risk and support data-informed patrol prioritisation.
+
+</div>
+
+<div class="tah-feature" markdown>
+
+### :material-wifi-off:
+
+**Offline-First Field Operations**
+
+Record patrols and incidents without cellular connectivity and synchronise when a connection returns.
+
+</div>
+
+<div class="tah-feature" markdown>
+
+### :material-satellite-variant:
+
+**Environmental Intelligence**
+
+Use satellite and environmental data alongside historical conservation information to assess risk.
+
+</div>
+
+<div class="tah-feature" markdown>
+
+### :material-map-marker-radius:
+
+**Patrol Prioritisation**
+
+Turn risk intelligence into actionable patrol assignments for field teams.
+
+</div>
+
+<div class="tah-feature" markdown>
+
+### :material-camera-outline:
+
+**Incident Evidence**
+
+Capture incident information and photographic evidence directly from the field.
+
+</div>
+
+<div class="tah-feature" markdown>
+
+### :material-account-group:
+
+**Commander & Ranger Platform**
+
+Connect command-level decision making with ranger operations through web and mobile applications.
+
+</div>
+
+</div>
+
+</div>
