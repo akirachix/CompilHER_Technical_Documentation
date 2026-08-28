@@ -2,14 +2,18 @@
 
 ## System architecture diagram
 
-![TAHADHARI system architecture](assets/architecture/system-architecture.png)
+<img class="architecture-image"
+     src="../assets/architecture/system-architecture.png"
+     alt="TAHADHARI system architecture">
 
 TAHADHARI is a three-tier system — two clients, one API, one database — with a batch intelligence
 pipeline attached that pulls in environmental data and writes back risk scores.
 
 ## System architecture with security controls
 
-![TAHADHARI system architecture with security controls](assets/architecture/system-architecture-security.png)
+<img class="architecture-image"
+     src="../assets/architecture/system-architecture-security.png"
+     alt="TAHADHARI system architecture with security controls">
 
 Security controls in the running system: bearer-token authentication on protected endpoints, closed
 registration with no public signup, UUID identifiers throughout so nothing is enumerable, and TLS in

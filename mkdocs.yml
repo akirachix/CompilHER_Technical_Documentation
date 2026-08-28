@@ -2,8 +2,8 @@ site_name: TAHADHARI Documentation
 site_description: Developer documentation for TAHADHARI, an offline-first conservation intelligence and patrol prioritisation platform.
 site_url: https://akirachix.github.io/CompilHER_Technical_Documentation/
 repo_url: https://github.com/akirachix/CompilHER_Technical_Documentation
-repo_name: compil-her/tahadhari
-edit_uri: ""
+repo_name: CompilHER_Technical_Documentation
+
 
 theme:
   name: material
@@ -43,6 +43,9 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/architecture.js
+
 markdown_extensions:
   - admonition
   - attr_list
@@ -65,6 +68,10 @@ markdown_extensions:
           format: !!python/name:pymdownx.superfences.fence_code_format
   - pymdownx.tabbed:
       alternate_style: true
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  
 
 plugins:
   - search
