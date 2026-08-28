@@ -1,37 +1,134 @@
-# Backend and Database
+#  TAHADHARI System Architecture: Backend & Database
 
-## Backend
+Welcome to the core backend engineering reference for the **TAHADHARI Ecosystem**. This platform provides high-throughput telemetry ingestion, predictive wildlife risk modeling, and seamless operational synchronization between **Commanders** at HQ and **Rangers** deployed in the field.
 
-Python + FastAPI, serving `/api/v1` at `https://tahadhari-4157e9afb97a.herokuapp.com`.
-Interactive docs at `/docs`, schemas at `/redoc`.
+---
 
-### Authentication
+##  1. Getting Started
 
-OAuth2 password flow with JWT bearer tokens.
+Follow these step-by-step instructions to get your local development environment up and running.
 
-Get a token — form-encoded, with the email in the `username` field:
+###  Prerequisites
+Ensure your local host machine meets the following strict system engine requirements:
 
+| Tool       | Version               |
+| ---------- | --------------------- |
+| Python     | 3.12+                 |
+| PostgreSQL | 16                    |
+| PostGIS    | 3.4                   |
+| Git        | Recent version        |
+
+### Local Environment Initialization
+
+#### Step 1: Clone Core Repository
+Clone the project backend code directly from the organization repository:
 ```bash
-curl -X POST .../api/v1/users/login \
+git clone https://github.com/akirachix/Compil-HER_Backend.git
+```
+
+#### Step 2: Configure and Boot the FastAPI Server
+```bash
+# Navigate to backend application directory
+cd Compil-HER_Backend/backend
+
+# Create and isolate virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install exact dependency trees
+pip install -r requirements.txt
+```
+
+#### Step 3: Populate Environment Profiles
+Create a standard system configuration file named `.env` in your `Compil-HER_Backend/backend/` root directory:
+```env
+API_URL=http://localhost:8000
+LOGIN_URL=http://localhost:3000/login
+FRONTEND_URL=http://localhost:3000
+
+DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/tahadhari_db
+SECRET_KEY=YOUR_SECURE_SECRET
+
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=YOUR_ADMIN_PASSWORD
+```
+> **CRITICAL SECURITY NOTE:** Never commit the `.env` file to source control. Generate your cryptographically secure `SECRET_KEY` by running:
+> `python3 -c "import secrets; print(secrets.token_urlsafe(64))"`
+> 
+> *The `ADMIN_EMAIL` and `ADMIN_PASSWORD` keys seed the initial base user. Because client registration requires a valid bearer token, these values let you establish the first master dashboard session.*
+
+#### Step 4: Provision Spatial Database Architecture
+Log into your local PostgreSQL console instance and execute these structural commands to spin up the relational data store:
+```bash
+psql -U postgres -c "CREATE DATABASE tahadhari_db;"
+psql -U postgres -d tahadhari_db -c "CREATE EXTENSION IF NOT EXISTS postgis;"
+psql -U postgres -d tahadhari_db -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp";'
+```
+
+* **`postgis`** enables high-performance `GEOMETRY(Polygon)` data handling for tactical 1km × 1km grid patterns.
+
+* **`uuid-ossp`** configures native generation loops for secure UUID primary keys.
+
+Now run system upgrades and seed test data files to populate the tables:
+```bash
+alembic upgrade head
+python seed_data.py
+```
+
+#### Step 5: Configure Dashboard Environment variables
+Create a `.env.local` configuration file in your dashboard layout project root directory and add the following variable:
+```env
+NEXT_PUBLIC_API_URL=http://localhost:8000
+```
+
+#### Step 6: Launch the Backend Service Gateway
+Run the live server loop with the reload flag active for fast prototyping changes:
+```bash
+cd Compil-HER_Backend/backend
+source venv/bin/activate
+
+uvicorn app.main:app --reload --port 8000
+```
+
+#### Step 7: Verify Application Engine Connectivity
+
+Once channels are open, verify application connectivity statuses instantly:
+
+* **Interactive OpenAPI Specs (Local):** [http://localhost:8000/docs](http://localhost:8000/docs)
+
+* **Production Live Swagger UI Engine:** [https://herokuapp.com](https://tahadhari-4157e9afb97a.herokuapp.com/)
+
+---
+
+##  2. Security & Core API Workflows
+
+### Authentication Flow
+The system operates exclusively via an **OAuth2 Password Bearer Flow** enforcing ephemeral signed stateless JSON Web Tokens (JWT).
+
+#### Fetch Authorization Token Sequence
+Get a bearer token - form-encoded, passing user emails inside the native `username` field target:
+```bash
+curl -X POST https://herokuapp.com \
   -H "Content-Type: application/x-www-form-urlencoded" \
   -d "username=user@example.com&password=YOUR_PASSWORD"
 ```
 
-Use it on every other request:
-
-```
+Pass the generated session token string safely within the header payload framework for all guarded sub-routes:
+```text
 Authorization: Bearer <token>
 ```
+> Note: Account creation functions are protected. There is no open public registration path; new users must be created through an administrative dashboard session.
 
-Registration requires a token — there is no public signup. The first account comes from
-`ADMIN_EMAIL` / `ADMIN_PASSWORD` in the backend `.env`.
+---
 
-### API reference
+##  3. Microservice API Reference Map
 
-**Users**
+All endpoints below require a valid bearer token payload configuration except for `POST /api/v1/users/login`.
+
+### Users Management
 
 | Method | Path | Purpose |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `POST` | `/api/v1/users/register` | Register a new user |
 | `POST` | `/api/v1/users/login` | Log in *(no auth)* |
 | `GET` | `/api/v1/users/rangers` | List on-duty rangers |
@@ -43,67 +140,82 @@ Registration requires a token — there is no public signup. The first account c
 | `PATCH` | `/api/v1/users/{user_id}/change-password` | Change password |
 | `PATCH` | `/api/v1/users/{user_id}/reactivate` | Reactivate an account |
 
-**Assignments**
+### Assignments & Deployment
 
 | Method | Path | Purpose |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `POST` | `/api/v1/assignments/deploy` | Assign a ranger to a grid cell |
 | `GET` | `/api/v1/assignments/` | List deployments |
 | `GET` | `/api/v1/assignments/ranger/{user_id}/map` | Cells assigned to one ranger |
 | `DELETE` | `/api/v1/assignments/{assignment_id}` | Cancel a patrol route |
 
-**Locations**
+### Spatial Locations Grid
 
 | Method | Path | Purpose |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `POST` | `/api/v1/locations/init` | Initialise a grid cell |
 | `GET` | `/api/v1/locations/` | List all cells |
 | `GET` | `/api/v1/locations/{grid_id}` | Read a cell by ID |
 
-**Reports**
+### Field Reports & Incident Tracking
 
 | Method | Path | Purpose |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `POST` | `/api/v1/reports/sync` | Sync offline field reports |
 | `GET` | `/api/v1/reports/` | List incident logs |
 | `GET` | `/api/v1/reports/{report_id}` | Read one incident log |
 | `PATCH` | `/api/v1/reports/{report_id}` | Review and escalate |
 
-**Photos**
+### Multimedia Management
 
 | Method | Path | Purpose |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `POST` | `/api/v1/photos/upload` | Link a photo to a report |
 | `GET` | `/api/v1/photos/report/{report_id}` | Read photos for a report |
 
-**Risk**
+### Risk Assessment & Prediction Models
 
 | Method | Path | Purpose |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `POST` | `/api/v1/risk/calculate` | Trigger a risk calculation |
 | `GET` | `/api/v1/risk/latest` | Read the current heat map |
 | `GET` | `/api/v1/risk/grid/{grid_id}` | Read one cell's prediction |
 
-**Environmental**
+### Environmental Telemetry Layers
 
 | Method | Path | Purpose |
-| --- | --- | --- |
+| :--- | :--- | :--- |
 | `POST` | `/api/v1/environmental/ingest` | Ingest satellite and weather metrics |
 | `GET` | `/api/v1/environmental/grid/{grid_id}` | Read latest telemetry for a cell |
 | `GET` | `/api/v1/environmental/matrix` | Read the full feature timeline |
 
-All endpoints require a bearer token except `POST /api/v1/users/login`.
+---
 
-### Error handling
+##  4. Standardized Application Error Envelopes
 
-Errors return a single `detail` key:
+The backend structural framework handles edge cases explicitly. Standard operational rejections output a single `detail` key-value string:
 
 ```json
-{ "detail": "Not authenticated" }
+{ 
+  "detail": "Not authenticated" 
+}
 ```
 
-For validation failures `detail` is an **array** of `{loc, msg, type}` objects instead of a string,
-so clients must handle both forms.
+For client request or Pydantic layer data type alignment exceptions, the `detail` object converts to an **array payload listing** detailing `{loc, msg, type}` vectors:
+
+```json
+{
+  "detail": [
+    {
+      "loc": ["body", "email"],
+      "msg": "value is not a valid email address",
+      "type": "value_error.email"
+    }
+  ]
+}
+```
+
+### Global System Server Code Map
 
 | Code | Meaning |
 | --- | --- |
@@ -117,115 +229,10 @@ so clients must handle both forms.
 
 ---
 
-## Database
+## 5. Relational Database Schema Model
 
-PostgreSQL 16 with PostGIS 3.4. All primary keys are UUIDs; all timestamps are `TIMESTAMPTZ`.
+The production instance runs on **PostgreSQL 16** with **PostGIS 3.4**. Primary keys are natively managed via non-sequential UUID nodes. Global temporal logs use standard transactional `TIMESTAMPTZ` properties.
 
-### Allowed values
+The main engine components track coordinates and assignments across four core transactional structural systems: `users`, `locations`, `risk_assessments`, and `environmental_data`.
 
-| Type | Values |
-| --- | --- |
-| `user_role` | `Commander`, `Ranger`, `Admin` |
-| `risk_level_type` | `low`, `medium`, `high`, `critical` |
-| `incident_type_category` | `Snare`, `Poachers`, `Carcass` |
-
-### `users`
-
-| Column | Type | Constraints |
-| --- | --- | --- |
-| `user_id` | UUID | Primary key |
-| `first_name` | VARCHAR(50) | NOT NULL |
-| `last_name` | VARCHAR(50) | NOT NULL |
-| `role` | `user_role` | NOT NULL |
-| `email` | VARCHAR(255) | UNIQUE, NOT NULL |
-| `phone` | VARCHAR(20) | UNIQUE, NOT NULL |
-| `password_hash` | VARCHAR(250) | NOT NULL |
-| `is_active` | BOOLEAN | NOT NULL, default `true` |
-| `created_at` | TIMESTAMPTZ | NOT NULL |
-| `created_by` | UUID | FK → `users.user_id` |
-
-### `locations`
-
-| Column | Type | Constraints |
-| --- | --- | --- |
-| `grid_id` | UUID | Primary key |
-| `grid_name` | VARCHAR(50) | NOT NULL |
-| `grid_dimension` | GEOMETRY(Polygon, 4326) | NOT NULL |
-
-One row per 1 km × 1 km cell. All geometry uses SRID 4326.
-
-### `environmental_data`
-
-| Column | Type | Constraints |
-| --- | --- | --- |
-| `env_id` | UUID | Primary key |
-| `grid_id` | UUID | FK → `locations`, NOT NULL |
-| `ndvi_value` | DECIMAL(5,4) | NOT NULL, −1.0000 to 1.0000 |
-| `rainfall` | DECIMAL(6,2) | NOT NULL, mm |
-| `moon_phase` | DECIMAL(4,3) | NOT NULL, 0.000 to 1.000 |
-| `captured_at` | TIMESTAMPTZ | NOT NULL |
-
-### `risk_assessments`
-
-| Column | Type | Constraints |
-| --- | --- | --- |
-| `assessment_id` | UUID | Primary key |
-| `grid_id` | UUID | FK → `locations`, NOT NULL |
-| `risk_score` | DECIMAL(3,2) | NOT NULL, CHECK 0.00–1.00 |
-| `risk_level` | `risk_level_type` | NOT NULL |
-| `generated_date` | TIMESTAMPTZ | NOT NULL |
-
-### `assignments`
-
-| Column | Type | Constraints |
-| --- | --- | --- |
-| `assignment_id` | UUID | Primary key |
-| `grid_id` | UUID | FK → `locations`, NOT NULL |
-| `user_id` | UUID | FK → `users`, NOT NULL |
-| `assigned_at` | TIMESTAMPTZ | NOT NULL |
-| `created_by` | UUID | FK → `users.user_id` |
-
-### `reports`
-
-| Column | Type | Constraints |
-| --- | --- | --- |
-| `report_id` | UUID | Primary key |
-| `assignment_id` | UUID | FK → `assignments`, **NULL** |
-| `user_id` | UUID | FK → `users`, NOT NULL |
-| `grid_id` | UUID | FK → `locations`, NOT NULL |
-| `incident_type` | `incident_type_category` | NOT NULL |
-| `description` | TEXT | NULL |
-| `report_date` | TIMESTAMPTZ | NOT NULL |
-| `severity_level` | `risk_level_type` | NOT NULL |
-| `arrests_made` | INTEGER | |
-| `animals_caught` | INTEGER | |
-
-`report_date` is when the incident was observed, not when it synced.
-
-### `incident_report_photos`
-
-| Column | Type | Constraints |
-| --- | --- | --- |
-| `photo_id` | UUID | Primary key |
-| `report_id` | UUID | FK → `reports`, NOT NULL |
-| `photo_url` | VARCHAR(250) | NOT NULL |
-| `uploaded_at` | TIMESTAMPTZ | NOT NULL |
-
-Images live outside the database; only URLs are stored.
-
-### Relationships
-
-| Parent | Child | Cardinality |
-| --- | --- | --- |
-| `locations` | `environmental_data` | 1 : many |
-| `locations` | `risk_assessments` | 1 : many |
-| `locations` | `assignments` | 1 : many |
-| `locations` | `reports` | 1 : many |
-| `users` | `assignments` | 1 : many |
-| `users` | `reports` | 1 : many |
-| `users` | `users` | Self-referential (`created_by`) |
-| `assignments` | `reports` | 1 : many, optional |
-| `reports` | `incident_report_photos` | 1 : many |
-
-`reports.assignment_id` is the only nullable foreign key — rangers can log incidents found outside
-an assignment, so joins to `assignments` must use a `LEFT JOIN`.
+![TAHADHARI Relational Entity Mapping](assets/database/erd.png)
