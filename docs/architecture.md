@@ -130,5 +130,4 @@ returns. Photos link separately, after the report exists. Full detail on the off
 ## Related
 
 - [Backend](backend.md) — the API surface in full
-- [Database](database.md) — tables, columns and the ERD
 - [Mobile](mobile.md) — the offline sync model
