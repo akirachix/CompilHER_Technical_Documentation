@@ -7,7 +7,7 @@ Turning conservation data into smarter patrol decisions.
 
 <img class="tah-logo" src="assets/brand/tahadhari-logo2.png" alt="TAHADHARI">
 
-<a class="tah-website" href="YOUR_INFORMATIONAL_WEBSITE_URL" target="_blank" rel="noopener">
+<a class="tah-website" href="https://compil-her-informational-website.vercel.app/" target="_blank" rel="noopener">
   Visit the TAHADHARI Website →
 </a>
 
